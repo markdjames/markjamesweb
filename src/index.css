@@ -1,0 +1,192 @@
+@import 'tailwindcss';
+@import '@fontsource/big-shoulders-display/600';
+@import '@fontsource/big-shoulders-display/700';
+@import '@fontsource/big-shoulders-display/900';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+@import '@fontsource/ibm-plex-mono/600.css';
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+
+@theme {
+  --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+
+  --color-void: #06090a;
+  --color-panel: #0c1213;
+  --color-panel-raised: #101819;
+  --color-line: #1d2b2c;
+  --color-line-soft: #162223;
+  --color-ink: #e9efee;
+  --color-ink-dim: #9fb3b0;
+  --color-ink-faint: #5c716f;
+  --color-signal: #35e0a1;
+  --color-signal-dim: #1c7a5a;
+  --color-amber: #f0a94e;
+  --color-red: #e2604f;
+
+  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-scan: scan 8s linear infinite;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+/* Tailwind v4 preflight resets buttons to cursor: default */
+@layer base {
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-void);
+}
+
+body {
+  margin: 0;
+  background: var(--color-void);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-signal);
+  color: var(--color-void);
+}
+
+/* faint scanline / grid texture applied as a fixed overlay */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-line) 45%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-line) 45%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.bg-noise {
+  position: relative;
+}
+
+.bg-noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-signal) 55%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* pulses of "data" travelling along the bg-grid lines */
+.grid-pulse {
+  position: absolute;
+  opacity: 0;
+  border-radius: 999px;
+}
+
+.grid-pulse-x {
+  left: -8%;
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-signal) 45%, transparent),
+    transparent
+  );
+  box-shadow: 0 0 4px 0.5px color-mix(in srgb, var(--color-signal) 25%, transparent);
+  animation-name: pulse-travel-x;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.grid-pulse-y {
+  top: -8%;
+  width: 1.5px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--color-signal) 45%, transparent),
+    transparent
+  );
+  box-shadow: 0 0 4px 0.5px color-mix(in srgb, var(--color-signal) 25%, transparent);
+  animation-name: pulse-travel-y;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulse-travel-x {
+  0% {
+    left: -8%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.45;
+  }
+  88% {
+    opacity: 0.45;
+  }
+  100% {
+    left: 108%;
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-travel-y {
+  0% {
+    top: -8%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.45;
+  }
+  88% {
+    opacity: 0.45;
+  }
+  100% {
+    top: 108%;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid-pulse {
+    animation: none;
+    display: none;
+  }
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
