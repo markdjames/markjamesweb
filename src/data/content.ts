@@ -5,9 +5,9 @@ export const profile = {
   role: "Web Engineer & Engineering Manager",
   location: "UK",
   summary: [
-    "I'm a Web Engineer with nearly 20 years of professional experience, spanning a broad range of web paradigms, technologies, and roles. As an Engineering Manager, I prioritise people over process - focusing on building trust, creating a supportive environment, helping teams adopt AI effectively, and ensuring each team member finds purpose and fulfilment in their work. I believe happy teams are high-performing teams.",
-    "My roots are in full-stack web development, and I take pride in being able to navigate the entire stack, from UI to infrastructure and DevOps. Outside of work, I've been deep in agentic coding and AI-assisted development, building several personal projects — including a fully multi-tenant event discovery platform, which keeps me ahead of the curve on tools and workflows I bring back to my teams.",
-    "Over the course of my career, I've developed deep expertise in building and scaling complex web applications and the engineering teams behind them - from event-driven, distributed architectures built to absorb heavy load on constrained downstream systems, to authentication and identity systems, and the operational rigor that keeps high-traffic platforms reliable.",
+    "I'm a Web Engineer with nearly 20 years of professional experience, spanning a broad range of web paradigms, technologies, and roles. As an Engineering Manager, I prioritise people over process, focusing on building trust, creating a supportive environment, helping teams adopt AI effectively, and ensuring each team member finds purpose and fulfilment in their work. I believe happy teams are high-performing teams.",
+    "My roots are in full-stack web development, and I take pride in being able to navigate the entire stack, from UI to infrastructure and DevOps. Outside of work, I've been deep in agentic coding and AI-assisted development, building several personal projects, including a fully multi-tenant event discovery platform, which keeps me ahead of the curve on tools and workflows I bring back to my teams.",
+    "Over the course of my career, I've developed deep expertise in building and scaling complex web applications and the engineering teams behind them, from event-driven, distributed architectures built to absorb heavy load on constrained downstream systems, to authentication and identity systems, and the operational rigor that keeps high-traffic platforms reliable.",
   ],
 };
 
