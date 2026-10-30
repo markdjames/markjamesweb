@@ -71,6 +71,27 @@ export default function ProjectPage({ project }: { project: Project }) {
         </div>
       </section>
 
+      {project.screenshots && project.screenshots.length > 0 && (
+        <section className="border-b border-line-soft px-6 py-16 sm:px-8">
+          <div
+            className={`mx-auto grid max-w-6xl gap-4 ${
+              project.screenshots.length > 1 ? 'sm:grid-cols-2' : 'grid-cols-1'
+            }`}
+          >
+            {project.screenshots.map((screenshot, i) => (
+              <div key={screenshot} className="overflow-hidden rounded-md border border-line bg-panel">
+                <img
+                  src={screenshot}
+                  alt={`Screenshot ${i + 1} of ${project.name}`}
+                  className="w-full"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="border-b border-line-soft px-6 py-20 sm:px-8">
         <div className="mx-auto max-w-6xl">
           <SectionHeading index="01" label="readme" title="What it is" />
