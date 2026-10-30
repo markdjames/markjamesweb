@@ -8,12 +8,14 @@ export type Project = {
   status: ProjectStatus;
   platform: string;
   url?: { href: string; label: string };
+  note?: string;
+  published: boolean;
   summary: string[];
   highlights: { title: string; detail: string }[];
   stack: string[];
 };
 
-export const projects: Project[] = [
+const allProjects: Project[] = [
   {
     slug: "flyerbug",
     name: "Flyerbug",
@@ -22,6 +24,7 @@ export const projects: Project[] = [
       "Honest, algorithm-free event discovery and ticketing for the UK grassroots scene — one codebase, three brands.",
     status: "live",
     platform: "Cloudflare Workers",
+    published: false,
     url: { href: "https://flyerbug.net", label: "flyerbug.net" },
     summary: [
       "Flyerbug lists gigs, club nights and grassroots venue events with no paid placements pushing results around. The same codebase ships Sportsbug (sports fixtures) and Familybug (family events), with the brand chosen at build time for the frontends and at deploy time for the API and workers.",
@@ -73,6 +76,7 @@ export const projects: Project[] = [
       "The Philharmonia Orchestra's business platform: scheduling, personnel and reporting for everyone from administrators to musicians.",
     status: "live",
     platform: "PHP 8.2 + React",
+    published: false,
     summary: [
       "Mobi runs the day-to-day business of a major symphony orchestra: concert and rehearsal schedules, players and seating, repertoire, venues and the reports that finance and management depend on. I led its original build as a staff developer, and have been brought back as a freelancer to modernise it.",
       "The modernisation is a live migration rather than a rewrite. A new React interface is replacing the legacy PHP pages one at a time behind the same router, while the platform moved to the cloud, authentication moved to AWS Cognito, and the codebase gained the tests and structure it needs to keep going for another decade.",
@@ -123,6 +127,7 @@ export const projects: Project[] = [
       "Facilitation tools for teams: one room, one code, one hour — icebreakers, health checks, retros, estimation and quizzes in whatever order the day wants.",
     status: "live",
     platform: "Cloudflare Workers + Durable Objects",
+    published: true,
     url: { href: "https://truebear.ing", label: "truebear.ing" },
     summary: [
       "True Bearing started as a team quiz and grew into a suite. A session opens a single live room, and everything a team does in it — a go-round, a health check, a retro board, a pointing round, a quiz — is a step that room runs. Joining needs a code and a name, never an account.",
@@ -173,6 +178,7 @@ export const projects: Project[] = [
       "An AI website builder for charities and arts organisations, where the AI writes a validated site spec and never writes code.",
     status: "in development",
     platform: "Cloudflare Workers",
+    published: true,
     summary: [
       "Small charities, choirs and arts groups need websites that are correct by default: legal details in the footer, accessibility and privacy statements, events that archive themselves. Digital Society lets them describe their organisation and get a working site, then edit it by chat or by hand.",
       "The model only ever produces JSON that must pass a schema; a fixed, server-rendered block library turns that into pages. Every edit lands in a draft, and the public site changes only when someone presses Publish. The roadmap is driven by a research report on what small sector websites actually need.",
@@ -215,13 +221,19 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "household-finances",
-    name: "Household Finances",
+    slug: "squirrel",
+    name: "Squirrel",
     repo: "finances",
     tagline:
-      "A household budget built from real bank statements, where every figure on screen drills through to the transactions behind it.",
+      "Household finances, in a nutshell — a budget built from real bank statements, where every figure on screen drills through to the transactions behind it.",
     status: "live",
     platform: "Cloudflare Workers",
+    url: {
+      href: "https://finances.markjamesweb.dev",
+      label: "finances.markjamesweb.dev",
+    },
+    note: "A personal project for my own household — not for public consumption, so sign-up is closed.",
+    published: true,
     summary: [
       "What began as a Python pipeline that read CSV exports and regenerated a monthly dashboard became a hosted app: sign in, upload a statement, preview exactly what it would import, review anything uncategorised and read the month — all from a phone.",
       "It is used by one household but built as though thousands might, because retrofitting multi-tenancy onto a finance app costs far more than designing for it. Next on the list are bank feeds through Monzo's API and asking questions about spending in plain English.",
@@ -272,6 +284,7 @@ export const projects: Project[] = [
       "A treasure-map geography game for children: find the place, tap the map, and learn where it is by being shown.",
     status: "in development",
     platform: "Android (Godot 4)",
+    published: true,
     summary: [
       "The player is asked to find a country, a sea or a landmark and taps where they think it is. Captain Emmy, a pirate guide, cheers them on, and a wrong answer is shown on the map rather than just marked wrong. An explore mode drops the questions entirely: tap anywhere to see what's there, with a fact card and a photo.",
       "It is a learning project for mobile game development, so the code favours clarity over cleverness. It runs at 60 fps on a phone, and the Play Store release is being prepared.",
@@ -313,6 +326,7 @@ export const projects: Project[] = [
       "Tell it a book you loved. Get five worth reading next, each with a reason you'd believe from a well-read friend.",
     status: "prototype",
     platform: "Cloudflare Workers",
+    published: true,
     summary: [
       "Book Match does one job: take a book someone liked and hand back a small number of recommendations with an honest reason grounded in the actual book. No account, no shelf to manage, no feed, no streaks — the best outcome is that someone finds a good book and leaves.",
       "The v0 build is a single server-rendered Worker over a hand-picked catalogue, using real content embeddings for similarity. The specification treats the quality of the reason as the central technical risk, not a footnote.",
@@ -342,3 +356,6 @@ export const projects: Project[] = [
     stack: ["Hono JSX", "Workers AI", "Vectorize", "D1"],
   },
 ];
+
+// drafts stay in the file but are not listed or routed until published
+export const projects = allProjects.filter((project) => project.published);

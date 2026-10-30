@@ -62,6 +62,11 @@ export default function ProjectPage({ project }: { project: Project }) {
                 runtime: {project.platform}
               </span>
             </div>
+            {project.note && (
+              <p className="mt-6 max-w-3xl border-l-2 border-amber pl-4 font-mono text-xs leading-relaxed text-amber">
+                {project.note}
+              </p>
+            )}
           </motion.div>
         </div>
       </section>
