@@ -71,27 +71,6 @@ export default function ProjectPage({ project }: { project: Project }) {
         </div>
       </section>
 
-      {project.screenshots && project.screenshots.length > 0 && (
-        <section className="border-b border-line-soft px-6 py-16 sm:px-8">
-          <div
-            className={`mx-auto grid max-w-6xl gap-4 ${
-              project.screenshots.length > 1 ? 'sm:grid-cols-2' : 'grid-cols-1'
-            }`}
-          >
-            {project.screenshots.map((screenshot, i) => (
-              <div key={screenshot} className="overflow-hidden rounded-md border border-line bg-panel">
-                <img
-                  src={screenshot}
-                  alt={`Screenshot ${i + 1} of ${project.name}`}
-                  className="w-full"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
       <section className="border-b border-line-soft px-6 py-20 sm:px-8">
         <div className="mx-auto max-w-6xl">
           <SectionHeading index="01" label="readme" title="What it is" />
@@ -102,6 +81,24 @@ export default function ProjectPage({ project }: { project: Project }) {
                   {paragraph}
                 </p>
               ))}
+              {project.screenshots && project.screenshots.length > 0 && (
+                <div
+                  className={`grid gap-4 pt-2 ${
+                    project.screenshots.length > 1 ? 'sm:grid-cols-2' : 'grid-cols-1'
+                  }`}
+                >
+                  {project.screenshots.map((screenshot, i) => (
+                    <div key={screenshot} className="overflow-hidden rounded-md border border-line bg-panel">
+                      <img
+                        src={screenshot}
+                        alt={`Screenshot ${i + 1} of ${project.name}`}
+                        className="w-full"
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="rounded-md border border-line bg-panel p-5 self-start">
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-faint">dependencies</p>
