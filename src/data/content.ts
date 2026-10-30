@@ -5,8 +5,8 @@ export const profile = {
   role: "Web Engineer & Engineering Manager",
   location: "UK",
   summary: [
-    "I've spent over 20 years building for the web, and a good part of that leading the teams who build it. As an Engineering Manager I put people before process: my job is to build trust, make it safe to raise problems early, help the team get real value out of AI, and make sure everyone can see why their work matters. Happy teams are high-performing teams. I've never seen it work the other way round.",
-    "I started out full-stack and I still am, comfortable anywhere from the UI down to the infrastructure and the deploy pipeline. Outside work I've gone deep on agentic coding and used it to build several products of my own, including a multi-tenant event discovery platform. That's where I find out which tools and workflows actually hold up before I bring them to my teams.",
+    "I've spent over 20 years building for the web, and a good part of that leading the teams who build it. As an Engineering Manager I put people before process: my job is to build trust, make it safe to raise problems early, help the team get real value out of AI, and make sure everyone can see why their work matters. Happy teams are high-performing teams.",
+    "I started out full-stack and I still am, comfortable anywhere from the UI down to the infrastructure and the deploy pipeline. I've gone deep on agentic coding both at work and in my personal projects, and used it to build several products of my own, including a multi-tenant event discovery platform. That's where I find out which tools and workflows actually hold up before I bring them to my teams.",
     "Most of my career has gone into the hard parts of busy web platforms: event-driven systems that soak up huge traffic spikes in front of downstream services that can only handle a fraction of the load, authentication and identity across many tenants, and the monitoring, alerting and on-call habits that keep everything up when it matters most.",
   ],
 };
@@ -131,7 +131,13 @@ export const services: ServiceGroup[] = [
   {
     name: "auth-identity",
     status: "OPERATIONAL",
-    items: ["Auth0", "AWS Cognito", "Better Auth", "OAuth", "Magic-link sign-in"],
+    items: [
+      "Auth0",
+      "AWS Cognito",
+      "Better Auth",
+      "OAuth",
+      "Magic-link sign-in",
+    ],
   },
   {
     name: "ai-engineering",

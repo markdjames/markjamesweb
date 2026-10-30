@@ -127,6 +127,7 @@ const allProjects: Project[] = [
     repo: "true-bearing",
     tagline:
       "Facilitation tools for teams: one room, one code, one hour. Icebreakers, health checks, retros, estimation and quizzes, in whatever order the day wants.",
+    note: "Built out of frustration at the lack of good facilitation tools for teams, and to explore agentic workflows.",
     status: "in development",
     platform: "Cloudflare Workers + Durable Objects",
     published: true,
@@ -179,6 +180,7 @@ const allProjects: Project[] = [
     repo: "digital-society",
     tagline:
       "An AI website builder for charities and arts organisations, where the AI is never allowed to write code.",
+    note: "How can we use AI to build websites without giving it the ability to break them?",
     status: "in development",
     platform: "Cloudflare Workers",
     published: true,
@@ -229,7 +231,7 @@ const allProjects: Project[] = [
       href: "https://finances.markjamesweb.dev",
       label: "finances.markjamesweb.dev",
     },
-    note: "A personal project for my own household, so sign-up is closed.",
+    note: "A personal project for my own household.",
     screenshots: ["/screenshots/squirrel.webp"],
     published: true,
     summary: [
@@ -280,10 +282,14 @@ const allProjects: Project[] = [
     repo: "geo-game",
     tagline:
       "A treasure-map geography game for children: find the place, tap the map, and learn where it is by being shown.",
+    note: "A learning project for mobile game development, exploring Godot 4 and agentic workflows.",
     status: "in development",
     platform: "Android (Godot 4)",
     published: true,
-    screenshots: ["/screenshots/geo-game-1.webp", "/screenshots/geo-game-2.webp"],
+    screenshots: [
+      "/screenshots/geo-game-1.webp",
+      "/screenshots/geo-game-2.webp",
+    ],
     summary: [
       "The player is asked to find a country, a sea or a landmark and taps where they think it is. Captain Emmy, a pirate guide, cheers them on, and a wrong answer is shown on the map rather than just marked wrong. An explore mode drops the questions entirely: tap anywhere to see what's there, with a fact card and a photo.",
       "It is a learning project for mobile game development, so the code favours clarity over cleverness. It runs at 60 fps on a phone, and the Play Store release is being prepared.",
@@ -323,6 +329,7 @@ const allProjects: Project[] = [
     repo: "bookmatchproject",
     tagline:
       "Tell it a book you loved. Get five worth reading next, each with a reason you'd believe from a well-read friend.",
+    note: "I wanted to find new books to read, so thought I'd build a tool for that!",
     status: "live",
     platform: "Cloudflare Workers",
     published: true,
