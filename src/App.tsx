@@ -12,7 +12,7 @@ import PortfolioIndex from './components/portfolio/PortfolioIndex'
 import ProjectPage from './components/portfolio/ProjectPage'
 import { projects } from './data/projects'
 
-const SITE_TITLE = 'Mark James — Web Engineer & Engineering Manager'
+const SITE_TITLE = 'Mark James · Web Engineer & Engineering Manager'
 
 function Home() {
   // the page renders after the browser's own jump to the fragment, so arriving
@@ -50,13 +50,13 @@ function NotFound() {
 function resolve(pathname: string): { page: React.ReactNode; title: string } {
   const path = pathname.replace(/\/+$/, '') || '/'
   if (path === '/') return { page: <Home />, title: SITE_TITLE }
-  if (path === '/portfolio') return { page: <PortfolioIndex />, title: 'Portfolio — Mark James' }
+  if (path === '/portfolio') return { page: <PortfolioIndex />, title: 'Portfolio · Mark James' }
 
   const match = path.match(/^\/portfolio\/([^/]+)$/)
   const project = match && projects.find((p) => p.slug === match[1])
-  if (project) return { page: <ProjectPage project={project} />, title: `${project.name} — Mark James` }
+  if (project) return { page: <ProjectPage project={project} />, title: `${project.name} · Mark James` }
 
-  return { page: <NotFound />, title: 'Not found — Mark James' }
+  return { page: <NotFound />, title: 'Not found · Mark James' }
 }
 
 function App() {

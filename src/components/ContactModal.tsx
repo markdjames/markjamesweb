@@ -115,7 +115,7 @@ export default function ContactModal({ open, onClose }: Props) {
             {status === 'success' ? (
               <div className="space-y-4">
                 <p className="font-mono text-sm text-signal">
-                  ✓ delivered — thanks, I'll get back to you soon.
+                  ✓ delivered. Thanks, I'll get back to you soon.
                 </p>
                 <button
                   type="button"

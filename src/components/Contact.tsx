@@ -42,7 +42,7 @@ export default function Contact() {
         </h2>
 
         <p className="mx-auto mt-5 max-w-xl text-base text-ink-dim">
-          Whether it's a role, a project, or just a chat - the channel's open.
+          Whether it's a role, a project or just a chat, the channel's open.
         </p>
 
         <div className="mt-10 flex justify-center">

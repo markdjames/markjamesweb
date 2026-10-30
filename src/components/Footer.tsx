@@ -35,7 +35,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-line-soft px-6 py-8 sm:px-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 font-mono text-[11px] text-ink-faint sm:flex-row">
-        <p>© {new Date().getFullYear()} Mark James — all rights reserved.</p>
+        <p>© {new Date().getFullYear()} Mark James · All rights reserved.</p>
 
         <div className="flex items-center gap-5">
           {links.map((link) => (

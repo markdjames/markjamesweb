@@ -55,7 +55,7 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
     })
   } catch (error) {
     console.error('EMAIL.send failed', error)
-    return json({ error: 'Could not send right now — please try again shortly.' }, 502)
+    return json({ error: "Couldn't send that just now. Please try again shortly." }, 502)
   }
 
   return json({ ok: true })

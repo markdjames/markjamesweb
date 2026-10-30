@@ -22,7 +22,7 @@ const allProjects: Project[] = [
     name: "Flyerbug",
     repo: "flyerbug",
     tagline:
-      "Honest, algorithm-free event discovery and ticketing for the UK grassroots scene — one codebase, three brands.",
+      "Honest, algorithm-free event discovery and ticketing for the UK grassroots scene. One codebase, three brands.",
     status: "live",
     platform: "Cloudflare Workers",
     published: false,
@@ -126,41 +126,41 @@ const allProjects: Project[] = [
     name: "True Bearing",
     repo: "true-bearing",
     tagline:
-      "Facilitation tools for teams: one room, one code, one hour — icebreakers, health checks, retros, estimation and quizzes in whatever order the day wants.",
+      "Facilitation tools for teams: one room, one code, one hour. Icebreakers, health checks, retros, estimation and quizzes, in whatever order the day wants.",
     status: "in development",
     platform: "Cloudflare Workers + Durable Objects",
     published: true,
     url: { href: "https://truebear.ing", label: "truebear.ing" },
     screenshots: ["/screenshots/true-bearing.webp"],
     summary: [
-      "True Bearing started as a team quiz and grew into a suite. A session opens a single live room, and everything a team does in it — a go-round, a health check, a retro board, a pointing round, a quiz — is a step that room runs. Joining needs a code and a name, never an account.",
-      "It is one Worker, one database and one sign-in, with each tool a separate module rather than a separate deployment. Durable Objects hold live coordination; D1 holds what a team keeps afterwards, such as its quiz library, retro actions and estimation history.",
+      "True Bearing started life as a team quiz and grew into a whole facilitation kit. A session opens one live room, and everything the team does in it (a go-round, a health check, a retro, a pointing round, a quiz) is just the next step that room runs. Joining takes a code and your name. Nobody should have to create an account to take part in a retro.",
+      "Under the hood it's one Worker, one database and one sign-in, with each tool a module instead of its own deployment. Durable Objects handle everything live, and D1 keeps whatever the team wants afterwards: its quiz library, retro actions and estimation history.",
     ],
     highlights: [
       {
-        title: "A reusable room kernel",
+        title: "Build the room once",
         detail:
-          "Codes, identity, hibernatable WebSockets, rosters and per-viewer snapshots live in one base class, proven against a fixture app so it stays general.",
+          "Every tool needs the same plumbing: join codes, who's who, live connections that sleep when the room goes quiet, and a view of the room that's right for each person in it. All of that lives in one base class, tested against a dummy app with no real features so nothing tool-specific can creep in.",
       },
       {
-        title: "Privacy by construction",
+        title: "Anonymous means anonymous",
         detail:
-          'Retro anonymity is a load-bearing invariant: each step owns its own data, and nothing is stored in a way that makes "who wrote what" a join away.',
+          "If a retro says it's anonymous, people have to believe it, or they won't say the thing that matters. Each step keeps its own data, and nothing is stored in a way that would let anyone, me included, link a card back to the person who wrote it.",
       },
       {
-        title: "Ownership in every query",
+        title: "Other teams' data doesn't exist",
         detail:
-          "Every read and write is scoped to an organisation in the WHERE clause, so another team's data is indistinguishable from data that doesn't exist.",
+          "Every read and write is filtered by organisation inside the query itself. Ask for another team's quiz and you get exactly what you'd get for a quiz that was never written: nothing at all.",
       },
       {
-        title: "No framework, one dependency",
+        title: "Light enough for meeting-room Wi-Fi",
         detail:
-          "A hand-rolled DOM client with per-app code splitting, a 60 KB join-path budget, and a design system with contrast, radius and button-size gates in CI.",
+          "People join on their phones, mid-meeting, often on a poor connection. So there's no framework: a hand-written client, split per tool, with a hard 60 KB budget on everything needed to get into a room. The design system has CI gates too, failing the build on weak contrast or buttons too small to tap.",
       },
       {
-        title: "Jira integration",
+        title: "Estimate the real backlog",
         detail:
-          "Estimation rounds can pull tickets from Jira over OAuth, with tokens held in a Durable Object that nothing can enumerate.",
+          "Estimation rounds pull tickets straight from Jira, so the team points real work instead of copying titles across by hand. OAuth tokens live in a Durable Object that can't be listed, so reaching a token means already knowing exactly where it is.",
       },
     ],
     stack: [
@@ -178,7 +178,7 @@ const allProjects: Project[] = [
     name: "Digital Society",
     repo: "digital-society",
     tagline:
-      "An AI website builder for charities and arts organisations, where the AI writes a validated site spec and never writes code.",
+      "An AI website builder for charities and arts organisations, where the AI is never allowed to write code.",
     status: "in development",
     platform: "Cloudflare Workers",
     published: true,
@@ -186,33 +186,33 @@ const allProjects: Project[] = [
     screenshots: ["/screenshots/digital-society.webp"],
     summary: [
       "Small charities, choirs and arts groups need websites that are correct by default: legal details in the footer, accessibility and privacy statements, events that archive themselves. Digital Society lets them describe their organisation and get a working site, then edit it by chat or by hand.",
-      "The model only ever produces JSON that must pass a schema; a fixed, server-rendered block library turns that into pages. Every edit lands in a draft, and the public site changes only when someone presses Publish. The roadmap is driven by a research report on what small sector websites actually need.",
+      "The model only ever produces a site description that has to pass a schema, and a fixed library of server-rendered blocks turns that into pages. Every edit lands in a draft, and the public site changes only when a person presses Publish.",
     ],
     highlights: [
       {
-        title: "Spec, not code",
+        title: "The AI fills in a form",
         detail:
-          "A Zod schema is the contract the AI works to, with validation retries, and owner-only fields such as legal details and branding that the AI can never set.",
+          "A model that writes code can write anything, including a broken or inaccessible page. Here it can only fill in a structured description of the site; if that fails validation, it's told why and tries again. Legal details and branding are owner-only, and the AI can't touch them at all.",
       },
       {
-        title: "Draft and publish",
+        title: "Nothing goes live by accident",
         detail:
-          'Full version history, restore, a "coming soon" page until first publish, and a renderer that only ever reads the published spec.',
+          'Chatting with an AI shouldn\'t change a live website mid-sentence. Every edit, by chat or by hand, lands in a draft with full version history and restore. The public site only ever reads the published version, and shows a "coming soon" page until there is one.',
       },
       {
-        title: "Safe media",
+        title: "Photos without the baggage",
         detail:
-          "Images are resized in the browser, type-checked from their bytes and stripped of metadata on the server, and served from the platform's own origin — fonts too.",
+          "Phone photos are huge and often record exactly where they were taken. Images are resized in the browser before upload, then checked by their actual contents (not their file extension) and stripped of metadata on the server. Images and fonts are served from the platform's own domain, so visitors aren't handed to third parties.",
       },
       {
-        title: "Organisations and roles",
+        title: "Built for volunteers",
         detail:
-          "Magic-link sign-in, invitations and owner/editor roles, with every site, version and photo belonging to an organisation.",
+          "Charity websites tend to outlive whoever set them up. Every site, version and photo belongs to the organisation, not a person. Sign-in is by emailed link, so there's no password to lose, and owners can invite editors so the site doesn't leave when one volunteer does.",
       },
       {
-        title: "Evidence-led roadmap",
+        title: "A roadmap from research",
         detail:
-          "Features are ordered by a sector report on small charity and arts websites, from compliance footers to policy packs and events blocks.",
+          "What gets built next is decided by a research report on what small charity and arts websites actually need, from compliance footers to policy packs and event listings.",
       },
     ],
     stack: ["Hono", "React", "Zod", "Claude", "D1", "R2", "Better Auth"],
@@ -222,45 +222,45 @@ const allProjects: Project[] = [
     name: "Squirrel",
     repo: "finances",
     tagline:
-      "Household finances, in a nutshell — a budget built from real bank statements, where every figure on screen drills through to the transactions behind it.",
+      "Household finances, in a nutshell. A budget built from real bank statements, where every figure on screen drills through to the transactions behind it.",
     status: "prototype",
     platform: "Cloudflare Workers",
     url: {
       href: "https://finances.markjamesweb.dev",
       label: "finances.markjamesweb.dev",
     },
-    note: "A personal project for my own household — not for public consumption, so sign-up is closed.",
+    note: "A personal project for my own household, so sign-up is closed.",
     screenshots: ["/screenshots/squirrel.webp"],
     published: true,
     summary: [
-      "What began as a Python pipeline that read CSV exports and regenerated a monthly dashboard became a hosted app: sign in, upload a statement, preview exactly what it would import, review anything uncategorised and read the month — all from a phone.",
+      "What began as a Python pipeline that read CSV exports and regenerated a monthly dashboard became a hosted app: sign in, upload a statement, preview exactly what it would import, review anything uncategorised and read the month, all from a phone.",
       "It is used by one household but built as though thousands might, because retrofitting multi-tenancy onto a finance app costs far more than designing for it. Next on the list are bank feeds through Monzo's API and asking questions about spending in plain English.",
     ],
     highlights: [
       {
-        title: "Money is integer pence",
+        title: "No rounding errors, ever",
         detail:
-          "In every layer and wire format. Pounds exist only in the formatter and the input parser; a float never touches a balance.",
+          "To a computer, 0.1 + 0.2 isn't quite 0.3, and a finance app that drifts by a penny is one you stop trusting. So every amount is stored and sent as whole pence. Pounds only exist at the moment you read a number or type one in.",
       },
       {
-        title: "The model never does arithmetic",
+        title: "The AI isn't allowed to do maths",
         detail:
-          "The planned AI layer emits a declarative query validated against a schema; SQLite computes the answer and the app formats it.",
+          "Language models are confidently bad at sums. When you can ask Squirrel about your spending in plain English, the AI's only job will be to turn the question into a structured query, checked before it runs. The database does the arithmetic, so the answer is exact and traceable to the same transactions as everything else.",
       },
       {
-        title: "Nothing silently restates history",
+        title: "Last month stays last month",
         detail:
-          "A rule change, re-import or recategorisation shows what it will alter before it alters it.",
+          "Tweak a categorisation rule and you could quietly rewrite a year of budgets. So any rule change, re-import or recategorisation shows exactly what it's about to alter, and waits for a yes, before it alters anything.",
       },
       {
-        title: "Tenancy as an invariant",
+        title: "No query can forget",
         detail:
-          "Every row belongs to a household, enforced by the data layer rather than by remembering, with self-serve auth via Better Auth on D1.",
+          "The classic way a multi-user finance app leaks is one query that forgets to check whose data it's reading. Every row belongs to a household and the data layer adds that check itself, so there's nothing for an individual query to forget.",
       },
       {
-        title: "Budgets as tests",
+        title: "The code has a budget too",
         detail:
-          "CI checks bundle size, Worker size, design-token usage and the CSP hash of the inline theme script alongside the usual suite.",
+          "Fitting, for a budgeting app. CI fails the build if the bundle or the Worker grows past its limit, if a component skips the design tokens, or if the inline theme script changes without its security-policy hash being updated.",
       },
     ],
     stack: [
@@ -290,29 +290,29 @@ const allProjects: Project[] = [
     ],
     highlights: [
       {
-        title: "Real map data",
+        title: "A proper map",
         detail:
-          "Natural Earth countries and marine areas in the Natural Earth projection, rebuilt from a pinned commit, with edges densified so the 180° meridian stays curved.",
+          "Countries and seas come from Natural Earth, the open dataset cartographers rely on, rebuilt from a pinned version so the map never shifts between releases. Long edges, like those along the 180° line, get extra points so they curve with the projection instead of cutting straight across it.",
       },
       {
-        title: "Fair taps at any zoom",
+        title: "Fair to small fingers",
         detail:
-          "Tolerances are in screen pixels so microstates are findable, enclaves don't count for the country around them, and a near miss zooms in for another go.",
+          "On a phone-sized world map, a fingertip is bigger than a dozen countries. Tap tolerance is measured in screen pixels, not map distance, so the tiny ones are still findable. Tapping an enclave doesn't count for the country around it, and a near miss zooms in for another go.",
       },
       {
-        title: "Difficulty from data",
+        title: "Is Chad harder than Chile?",
         detail:
-          "Every place has a tier scored from curriculum anchors, Natural Earth ranks and a year of Wikipedia page views, with hand overrides on top.",
+          "Every place gets a difficulty tier, scored from what the school curriculum expects children to know, how prominent the place is on the map and a year of Wikipedia page views. Hand overrides catch anything the numbers get wrong.",
       },
       {
-        title: "Strokes that don't scale",
+        title: "Lines that hold their weight",
         detail:
-          "Coastlines and borders are drawn from one mesh widened in a shader, so lines stay the same thickness however far you zoom.",
+          "Scale a map up naively and its borders get fat and blurry with it. Here coastlines and borders are a single mesh, widened on the GPU every frame, so a line is the same crisp thickness at any zoom.",
       },
       {
-        title: "Polish",
+        title: "The fun bits",
         detail:
-          "Sound effects, a sea shanty, haptics, a flying coin score and a round review that puts every answer back on the map.",
+          "A sea shanty, sound effects, haptics, coins that fly into the score, and a round review that puts every answer back on the map so the mistakes become the lesson.",
       },
     ],
     stack: ["Godot 4", "GDScript", "Shaders", "Node.js data tools", "Android"],
@@ -327,7 +327,7 @@ const allProjects: Project[] = [
     platform: "Cloudflare Workers",
     published: true,
     summary: [
-      "Book Match does one job: take a book someone liked and hand back a small number of recommendations with an honest reason grounded in the actual book. No account, no shelf to manage, no feed, no streaks — the best outcome is that someone finds a good book and leaves.",
+      "Book Match does one job: take a book someone liked and hand back a small number of recommendations, each with an honest reason grounded in the actual book. No account, no shelf to manage, no feed, no streaks. The best possible outcome is that someone finds a good book and leaves.",
       "The v0 build is a single server-rendered Worker over a hand-picked catalogue, using real content embeddings for similarity. The specification treats the quality of the reason as the central technical risk, not a footnote.",
     ],
     url: {
@@ -337,24 +337,24 @@ const allProjects: Project[] = [
     screenshots: ["/screenshots/book-match.webp"],
     highlights: [
       {
-        title: "Semantic similarity",
+        title: "Matched on what it's about",
         detail:
-          "Workers AI embeddings with Vectorize nearest-neighbour search, falling back to subject-tag overlap when a book has no embedding yet.",
+          "Books are compared on their actual content, using AI embeddings and a nearest-neighbour search, instead of on which shelf a shop would put them on. A book that hasn't been embedded yet falls back to shared subject tags.",
       },
       {
         title: "Not a bestseller list",
         detail:
-          "A diversity re-rank keeps results to one book per author, and the design actively guards against always surfacing the book everyone has heard of.",
+          "Start from a famous book and most recommenders hand you more famous books. Results are re-ranked to one book per author, and the design actively works against surfacing the one everyone has already read.",
       },
       {
-        title: "Value before signup",
+        title: "No sign-up wall",
         detail:
-          "An anonymous session cookie and interaction logging stand in for accounts, which are an upgrade path rather than a gate.",
+          "You get your recommendations before anything is asked of you. An anonymous session stands in for an account until there's a reason to want one, so accounts can only ever be an upgrade, never a gate.",
       },
       {
-        title: "Quiet admin surface",
+        title: "Nothing to see here",
         detail:
-          "Admin routes answer a plain 404 to anything without the secret, with per-IP rate limiting on failed attempts.",
+          'Without the secret, the admin pages don\'t say "forbidden". They say "not found", exactly like a page that doesn\'t exist, and repeated wrong guesses from one address get rate limited.',
       },
     ],
     stack: ["Hono JSX", "Workers AI", "Vectorize", "D1"],

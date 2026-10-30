@@ -43,7 +43,7 @@ function DeployCard({ deploy }: { deploy: Deploy }) {
             </span>
           </div>
           <span className="font-mono text-[11px] text-ink-faint">
-            {deploy.start} — {deploy.end ?? 'present'}
+            {deploy.start} – {deploy.end ?? 'present'}
           </span>
         </div>
 

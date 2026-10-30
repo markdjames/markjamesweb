@@ -31,7 +31,7 @@ export default function Milestones() {
 
           <div>
             <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-ink-faint">
-              background processes — always running
+              background processes, always running
             </p>
             <ul className="space-y-3">
               {processes.map((p, i) => (

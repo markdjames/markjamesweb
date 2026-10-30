@@ -77,9 +77,10 @@ export default function Hero() {
             variants={item}
             className="mt-4 max-w-6xl font-mono text-base text-ink-dim sm:text-lg"
           >
-            {profile.role}{" "}
+            {profile.role}.{" "}
             <span className="text-ink-faint">
-              — building &amp; scaling web platforms & teams for two decades.
+              Building and scaling web platforms, and the teams behind them, for
+              over two decades.
             </span>
           </motion.p>
         </div>

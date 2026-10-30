@@ -14,8 +14,8 @@ export default function PortfolioIndex() {
             Portfolio
           </h1>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-ink-dim sm:text-lg">
-            Freelance work and personal projects, built outside the day job — mostly on Cloudflare, mostly with
-            AI-assisted and agentic workflows. Each one is a real product with real constraints, not a demo.
+            Freelance work and personal projects from outside the day job. Most run on Cloudflare, and most were
+            built with AI-assisted, agentic workflows. They're real products with real constraints, not demos.
           </p>
         </div>
       </section>
