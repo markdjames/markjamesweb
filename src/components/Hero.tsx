@@ -113,6 +113,12 @@ export default function Hero() {
           >
             Open a channel
           </a>
+          <a
+            href="/portfolio"
+            className="rounded-sm border border-line px-5 py-3 font-mono text-xs uppercase tracking-[0.15em] text-ink-dim transition-colors hover:border-signal hover:text-signal md:hidden"
+          >
+            Portfolio
+          </a>
         </motion.div>
       </motion.div>
 
