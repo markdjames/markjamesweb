@@ -19,9 +19,10 @@
   --color-panel-raised: #101819;
   --color-line: #1d2b2c;
   --color-line-soft: #162223;
+  --color-line-strong: #52706d;
   --color-ink: #e9efee;
   --color-ink-dim: #9fb3b0;
-  --color-ink-faint: #5c716f;
+  --color-ink-faint: #7a918e;
   --color-signal: #35e0a1;
   --color-signal-dim: #1c7a5a;
   --color-amber: #f0a94e;
@@ -40,6 +41,11 @@
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 2px;
   }
 }
 
@@ -184,6 +190,11 @@ body {
   .grid-pulse {
     animation: none;
     display: none;
+  }
+
+  .animate-pulse-ring,
+  .animate-pulse {
+    animation: none;
   }
 }
 

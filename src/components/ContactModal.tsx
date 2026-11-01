@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from 'motion/react'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
+const FOCUSABLE = 'button:not(:disabled), input:not([tabindex="-1"]), textarea'
+
 type Props = {
   open: boolean
   onClose: () => void
@@ -12,6 +14,7 @@ export default function ContactModal({ open, onClose }: Props) {
   const [status, setStatus] = useState<Status>('idle')
   const [error, setError] = useState<string | null>(null)
   const firstFieldRef = useRef<HTMLInputElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!open) return
@@ -19,8 +22,30 @@ export default function ContactModal({ open, onClose }: Props) {
     setStatus('idle')
     setError(null)
 
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+      if (e.key !== 'Tab' || !dialogRef.current) return
+
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE)
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (!first || !last) return
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      } else if (!dialogRef.current.contains(document.activeElement)) {
+        e.preventDefault()
+        first.focus()
+      }
     }
     window.addEventListener('keydown', onKey)
     document.body.style.overflow = 'hidden'
@@ -30,6 +55,7 @@ export default function ContactModal({ open, onClose }: Props) {
       window.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
       cancelAnimationFrame(raf)
+      opener?.focus()
     }
   }, [open, onClose])
 
@@ -84,6 +110,7 @@ export default function ContactModal({ open, onClose }: Props) {
           />
 
           <motion.div
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="contact-modal-title"
@@ -105,8 +132,8 @@ export default function ContactModal({ open, onClose }: Props) {
               <button
                 type="button"
                 onClick={onClose}
-                aria-label="Close"
-                className="rounded-sm border border-line px-2.5 py-1.5 font-mono text-xs text-ink-faint transition-colors hover:border-signal hover:text-signal"
+                aria-label="Close dialog (esc)"
+                className="rounded-sm border border-line-strong px-2.5 py-1.5 font-mono text-xs text-ink-dim transition-colors hover:border-signal hover:text-signal"
               >
                 esc
               </button>
@@ -114,11 +141,12 @@ export default function ContactModal({ open, onClose }: Props) {
 
             {status === 'success' ? (
               <div className="space-y-4">
-                <p className="font-mono text-sm text-signal">
+                <p role="status" className="font-mono text-sm text-signal">
                   ✓ delivered. Thanks, I'll get back to you soon.
                 </p>
                 <button
                   type="button"
+                  autoFocus
                   onClick={onClose}
                   className="rounded-sm bg-signal px-5 py-2.5 font-mono text-xs uppercase tracking-[0.15em] text-void"
                 >
@@ -144,9 +172,10 @@ export default function ContactModal({ open, onClose }: Props) {
                     id="name"
                     name="name"
                     type="text"
+                    autoComplete="name"
                     required
                     maxLength={200}
-                    className="w-full rounded-sm border border-line bg-panel px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-signal-dim"
+                    className="w-full rounded-sm border border-line-strong bg-panel px-3.5 py-2.5 text-sm text-ink transition-colors focus:border-signal"
                   />
                 </div>
 
@@ -158,9 +187,10 @@ export default function ContactModal({ open, onClose }: Props) {
                     id="email"
                     name="email"
                     type="email"
+                    autoComplete="email"
                     required
                     maxLength={320}
-                    className="w-full rounded-sm border border-line bg-panel px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-signal-dim"
+                    className="w-full rounded-sm border border-line-strong bg-panel px-3.5 py-2.5 text-sm text-ink transition-colors focus:border-signal"
                   />
                 </div>
 
@@ -174,12 +204,12 @@ export default function ContactModal({ open, onClose }: Props) {
                     required
                     rows={4}
                     maxLength={5000}
-                    className="w-full resize-none rounded-sm border border-line bg-panel px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-signal-dim"
+                    className="w-full resize-none rounded-sm border border-line-strong bg-panel px-3.5 py-2.5 text-sm text-ink transition-colors focus:border-signal"
                   />
                 </div>
 
                 {status === 'error' && (
-                  <p className="font-mono text-xs text-red">{error}</p>
+                  <p role="alert" className="font-mono text-xs text-red">{error}</p>
                 )}
 
                 <button

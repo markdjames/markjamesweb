@@ -27,7 +27,7 @@ export default function Skills() {
               <ul className="mt-4 space-y-1.5">
                 {service.items.map((skill) => (
                   <li key={skill} className="font-mono text-xs text-ink-dim">
-                    <span className="mr-2 text-ink-faint">›</span>
+                    <span aria-hidden className="mr-2 text-ink-faint">›</span>
                     {skill}
                   </li>
                 ))}

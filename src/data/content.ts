@@ -70,7 +70,7 @@ export const deploys: Deploy[] = [
     lane: "primary",
     detail:
       "Spotted that we were solving the same third-party integration problems over and over, project by project, and led the build of a multi-tenant platform (Auth0 for authentication and tenant isolation) so we only had to solve them once. It grew into a core, revenue-generating product the whole team worked on, and helped win clients including Co-op Live, Southbank Centre, the Old Vic and the Roundhouse. As Head of Development, led a team of six.",
-    tags: ["Auth0", "Multi-tenant", "Leadership"],
+    tags: ["Ticketing", "Multi-tenant", "Leadership"],
   },
   {
     version: "v4.0.0",
@@ -82,7 +82,7 @@ export const deploys: Deploy[] = [
     lane: "secondary",
     detail:
       "Brought back, a decade on, to modernise the administration platform I'd led the build of: moving it to the cloud and its authentication to AWS Cognito, hardening its security and resilience, and rebuilding the frontend in React one page at a time while the orchestra keeps using it.",
-    tags: ["AWS Cognito", "React", "Cloud migration"],
+    tags: ["PHP", "React", "AWS"],
   },
   {
     version: "v4.0.1",
@@ -94,7 +94,7 @@ export const deploys: Deploy[] = [
     lane: "primary",
     detail:
       "Manage two engineering teams (12 engineers across several timezones) who own the core customer journey, including hiring, coaching and performance management. When a big show goes on sale, traffic arrives at many times what the downstream systems can take, so the platform is event-driven and built to absorb the spike instead of passing it on. Founded and run a cross-team monitoring and alerting guild, own the department’s on-call rotas and policies, and coach engineers on adopting AI coding assistants and agentic workflows.",
-    tags: ["Event-driven", "Reliability", "On-call", "Management"],
+    tags: ["Delivery", "Hiring", "Management"],
   },
 ];
 

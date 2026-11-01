@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { motion } from 'motion/react'
 import { deploys, type Deploy } from '../data/content'
 import SectionHeading from './SectionHeading'
 
 function DeployCard({ deploy }: { deploy: Deploy }) {
   const [open, setOpen] = useState(deploy.status === 'active')
+  const panelId = useId()
   const isActive = deploy.status === 'active'
 
   return (
@@ -26,31 +27,48 @@ function DeployCard({ deploy }: { deploy: Deploy }) {
         />
       </span>
 
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        className="w-full rounded-md border border-line bg-panel px-5 py-4 text-left transition-colors hover:border-signal-dim sm:px-6 sm:py-5"
-      >
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="font-mono text-xs text-ink-faint">{deploy.version}</span>
-            <span
-              className={`rounded-sm px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] ${
-                isActive ? 'bg-signal/15 text-signal' : 'bg-ink-faint/10 text-ink-faint'
-              }`}
-            >
-              {isActive ? 'active' : 'archived'}
+      <div className="rounded-md border border-line bg-panel px-5 py-4 transition-colors hover:border-signal-dim has-[button:focus-visible]:outline-2 has-[button:focus-visible]:outline-offset-2 has-[button:focus-visible]:outline-signal sm:px-6 sm:py-5">
+        <div className="relative">
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="font-mono text-xs text-ink-faint">{deploy.version}</span>
+              <span
+                className={`rounded-sm px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] ${
+                  isActive ? 'bg-signal/15 text-signal' : 'bg-ink-faint/10 text-ink-faint'
+                }`}
+              >
+                {isActive ? 'active' : 'archived'}
+              </span>
+            </div>
+            <span className="font-mono text-[11px] text-ink-faint">
+              {deploy.start} – {deploy.end ?? 'present'}
             </span>
           </div>
-          <span className="font-mono text-[11px] text-ink-faint">
-            {deploy.start} – {deploy.end ?? 'present'}
+
+          <h3 className="mt-3 font-display text-xl font-bold uppercase tracking-tight text-ink sm:text-2xl">
+            <button
+              type="button"
+              aria-expanded={open}
+              aria-controls={panelId}
+              onClick={() => setOpen((o) => !o)}
+              className="text-left uppercase outline-none after:absolute after:inset-0 after:content-['']"
+            >
+              {deploy.role}
+            </button>
+          </h3>
+          <p className="font-mono text-sm text-ink-dim">{deploy.org}</p>
+
+          <span
+            aria-hidden
+            className="mt-3 inline-block font-mono text-[10px] uppercase tracking-[0.15em] text-ink-faint"
+          >
+            {open ? '− collapse' : '+ expand'}
           </span>
         </div>
 
-        <h3 className="mt-3 font-display text-xl font-bold uppercase tracking-tight text-ink sm:text-2xl">{deploy.role}</h3>
-        <p className="font-mono text-sm text-ink-dim">{deploy.org}</p>
-
         <motion.div
+          id={panelId}
+          inert={!open}
           initial={false}
           animate={{ height: open ? 'auto' : 0, opacity: open ? 1 : 0 }}
           transition={{ duration: 0.35, ease: 'easeInOut' }}
@@ -68,11 +86,7 @@ function DeployCard({ deploy }: { deploy: Deploy }) {
             ))}
           </div>
         </motion.div>
-
-        <span className="mt-3 inline-block font-mono text-[10px] uppercase tracking-[0.15em] text-ink-faint">
-          {open ? '− collapse' : '+ expand'}
-        </span>
-      </button>
+      </div>
     </motion.div>
   )
 }

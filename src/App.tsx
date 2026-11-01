@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { MotionConfig } from 'motion/react'
 import StatusBar from './components/StatusBar'
 import Hero from './components/Hero'
 import Overview from './components/Overview'
@@ -67,14 +68,24 @@ function App() {
   }, [title])
 
   return (
-    <div className="relative min-h-screen bg-void text-ink">
-      <CursorGlow />
-      <div className="relative z-10">
-        <StatusBar />
-        <main>{page}</main>
-        <Footer />
+    <MotionConfig reducedMotion="user">
+      <div className="relative min-h-screen bg-void text-ink">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-sm focus:bg-signal focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:tracking-[0.15em] focus:text-void"
+        >
+          Skip to content
+        </a>
+        <CursorGlow />
+        <div className="relative z-10">
+          <StatusBar />
+          <main id="main" tabIndex={-1} className="outline-none">
+            {page}
+          </main>
+          <Footer />
+        </div>
       </div>
-    </div>
+    </MotionConfig>
   )
 }
 

@@ -124,6 +124,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
+        aria-hidden
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.1, duration: 0.8 }}

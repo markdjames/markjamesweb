@@ -17,7 +17,7 @@ export default function StatusBar() {
           </span>
           mjames<span className="text-ink-faint">.status</span>
         </a>
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-6 md:flex">
           {links.map((link) => (
             <a
               key={link.href}
